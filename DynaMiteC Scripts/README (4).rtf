@@ -1,0 +1,145 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1038\cocoasubrtf350
+{\fonttbl\f0\fswiss\fcharset0 ArialMT;\f1\fnil\fcharset0 Georgia;}
+{\colortbl;\red255\green255\blue255;\red26\green26\blue26;\red52\green52\blue52;\red65\green76\blue118;
+\red117\green117\blue117;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}
+{\list\listtemplateid2\listhybrid{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{decimal\}.}{\leveltext\leveltemplateid101\'02\'00.;}{\levelnumbers\'01;}\fi-360\li720\lin720 }{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{circle\}}{\leveltext\leveltemplateid102\'01\uc0\u9702 ;}{\levelnumbers;}\fi-360\li1440\lin1440 }{\listname ;}\listid2}
+{\list\listtemplateid3\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid201\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid3}
+{\list\listtemplateid4\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid301\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid4}
+{\list\listtemplateid5\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid401\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid5}
+{\list\listtemplateid6\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid501\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid6}
+{\list\listtemplateid7\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid601\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid7}
+{\list\listtemplateid8\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid701\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid8}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}{\listoverride\listid2\listoverridecount0\ls2}{\listoverride\listid3\listoverridecount0\ls3}{\listoverride\listid4\listoverridecount0\ls4}{\listoverride\listid5\listoverridecount0\ls5}{\listoverride\listid6\listoverridecount0\ls6}{\listoverride\listid7\listoverridecount0\ls7}{\listoverride\listid8\listoverridecount0\ls8}}
+\paperw11900\paperh16840\margl1440\margr1440\vieww37260\viewh24220\viewkind0
+\deftab720
+\pard\pardeftab720\sl420\sa280\ql\qnatural
+
+\f0\fs28 \cf2 These scripts are intended to run on the huji cs sun-grid-engine cluster. To run them on a different cluster, change the following files:\
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl420\ql\qnatural
+\ls1\ilvl0\cf2 {\listtext	\'95	}fit_and_cluster.sh, lines 69, 70 (qsub submits jobs to the cluster)\
+{\listtext	\'95	}fit_gene.sh, line 12 ($SGE_TASK_ID is the task number, which I used as an index in the gene list)\
+{\listtext	\'95	}weight.sh, lines 42, 43 (qsub commands)\
+{\listtext	\'95	}weightA.sh, line 12 ($SGE_TASK_ID)\
+\pard\pardeftab720\sl420\sa280\ql\qnatural
+\cf2 For any questions or comments, contact julsiv@gmail.com or naomih@cs.huji.ac.il\
+\pard\pardeftab720\sl420\ql\qnatural
+\cf2 \
+\pard\pardeftab720\sl420\sa380\ql\qnatural
+
+\f1\b\fs58 \cf3 impulse fit and cluster - tutorial\
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl420\ql\qnatural
+\ls2\ilvl0
+\f0\b0\fs28 \cf2 {\listtext	1.	}create a .mat file with the following variables:\
+\pard\tx940\tx1440\pardeftab720\li1440\fi-1440\sl420\ql\qnatural
+\ls2\ilvl1\cf2 {\listtext	\uc0\u9702 	}'data' - a matrix in which rows correspond to genes and columns correspond to expression values (or log ratio expression) at time points\
+{\listtext	\uc0\u9702 	}'x' - a row vector of time points\
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl420\ql\qnatural
+\ls2\ilvl0\cf2 {\listtext	2.	}\
+{\listtext	3.	}fit once without priors to get the standard deviation of the parameters\
+\pard\tx940\tx1440\pardeftab720\li1440\fi-1440\sl420\ql\qnatural
+\ls2\ilvl1\cf2 {\listtext	\uc0\u9702 	}fill in the fields in the configuration file impulse.conf (see details in \cf4 \ul \ulc4 file description at impulse.conf\cf2 \ulnone )\
+{\listtext	\uc0\u9702 	}rlogin to sm-gw\
+{\listtext	\uc0\u9702 	}run: fit_and_clusters.sh -nopriors\
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl420\ql\qnatural
+\ls2\ilvl0\cf2 {\listtext	4.	}\
+{\listtext	5.	}calculate the standard deviation of the parameters and save it in your data file\
+\pard\tx940\tx1440\pardeftab720\li1440\fi-1440\sl420\ql\qnatural
+\ls2\ilvl1\cf2 {\listtext	\uc0\u9702 	}open the file iter1.mat (in the output dir) in matlab (this is one of the output files of fit_and_cluster.sh, find it in your outputdir. see more details in \cf4 \ul \ulc4 get_priors.m\cf2 \ulnone )\
+{\listtext	\uc0\u9702 	}run: stdev = std(params) ('params' is a variable in 'iter1.mat')\
+{\listtext	\uc0\u9702 	}save the variable 'stdev' in your datafile (the one with 'data' and 'x')\
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl420\ql\qnatural
+\ls2\ilvl0\cf2 {\listtext	6.	}\
+{\listtext	7.	}find the best weight and k values (this is the hardest part, so if you want to skip it, you can guess k from hierarchical clustering, and take w=0.1)\
+\pard\tx940\tx1440\pardeftab720\li1440\fi-1440\sl420\ql\qnatural
+\ls2\ilvl1\cf2 {\listtext	\uc0\u9702 	}choose potential k values (number of priors/clusters), for example 7,8,9\
+{\listtext	\uc0\u9702 	}for each potential k, get initial priors with "getInitialPriors.m" (this gives you the initial priors as well as mini datasets to make weight error computations faster. see more details in \cf4 \ul \ulc4 file description at getInitialPriors.m\cf2 \ulnone )\
+{\listtext	\uc0\u9702 	}choose potential weight values, for example 0, 0.01, 0.1, 1, 10\
+{\listtext	\uc0\u9702 	}fill in the fields in the configuration file weight.conf (see details in \cf4 \ul \ulc4 file description at weight.conf\cf2 \ulnone )\
+{\listtext	\uc0\u9702 	}rlogin to sm-gw and run: weight.sh (this might take a lot of time, that is why I advise you to use the mini dataset that getInitialPriors gives you)\
+{\listtext	\uc0\u9702 	}in matlab, run: totalWeightErr and choose w and k that give you the smallest error with the highest agreement on cluster\
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl420\ql\qnatural
+\ls2\ilvl0\cf2 {\listtext	8.	}\
+{\listtext	9.	}now you are ready to run the fit!\
+\pard\tx940\tx1440\pardeftab720\li1440\fi-1440\sl420\ql\qnatural
+\ls2\ilvl1\cf2 {\listtext	\uc0\u9702 	}fill in the fields in the configuration file impulse.conf\
+{\listtext	\uc0\u9702 	}run: fit_and_cluster.sh 1 15 (which means: start from iter #1 and continue until iter #15. or how many iterations you want. you can add more later)\
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl420\ql\qnatural
+\ls2\ilvl0\cf2 {\listtext	10.	}\
+{\listtext	11.	}run analyseClusters to get all the pretty figures (see details in \cf4 \ul \ulc4 file description at analyseClusters.m\cf2 \ulnone )\
+\pard\pardeftab720\sl420\ql\qnatural
+\cf2 \
+\pard\pardeftab720\sl420\sa280\ql\qnatural
+\cf2 \
+\pard\pardeftab720\sl420\sa280\ql\qnatural
+\cf4 \ul \ulc4 impulse_scripts.tar\cf2 \ulnone  - tar file with all relevant scripts (all matlab functions and shell scripts in one big tar file)\
+\pard\pardeftab720\sl420\ql\qnatural
+\cf2 \
+\pard\pardeftab720\sl420\sa480\ql\qnatural
+
+\f1\fs48 \cf3 matlab functions\
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl420\ql\qnatural
+\ls3\ilvl0
+\f0\fs28 \cf4 {\listtext	\'95	}\ul getInitialPriors.m\cf2 \ulnone  - get initial priors using kmeans\
+\ls3\ilvl0\cf4 {\listtext	\'95	}\ul fit_gene.m\cf2 \ulnone  - finds the impulse parameters and the prior that minimizes the error function for a single gene from the list of genes\
+\ls3\ilvl0\cf4 {\listtext	\'95	}\ul get_priors.m\cf2 \ulnone  - calculates new priors according to fitting results\
+\pard\pardeftab720\sl420\ql\qnatural
+\cf2 \
+\pard\pardeftab720\sl420\ql\qnatural
+
+\b\fs32 \cf5 fitting functions\
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl420\ql\qnatural
+\ls4\ilvl0
+\b0\fs28 \cf4 {\listtext	\'95	}\ul fit_impulse_params_priors.m\cf2 \ulnone  - main function of the fit\
+\ls4\ilvl0\cf4 {\listtext	\'95	}\ul impulse.m\cf2 \ulnone  - implements gal chechik's impulse function\
+\ls4\ilvl0\cf4 {\listtext	\'95	}\ul impulse_grad.m\cf2 \ulnone  - calculate the gradient of the fit\
+\ls4\ilvl0\cf4 {\listtext	\'95	}\ul impulse_err.m\cf2 \ulnone  - calculate the error function\
+\ls4\ilvl0\cf4 {\listtext	\'95	}\ul impulse_grad_err.m\cf2 \ulnone  - calculate the gradient of the error function\
+\ls4\ilvl0\cf4 {\listtext	\'95	}\ul impulse_err_priors.m\cf2 \ulnone  - calculate the error function with priors\
+\ls4\ilvl0\cf4 {\listtext	\'95	}\ul impulse_grad_err_priors.m\cf2 \ulnone  - calculate the gradient of the error function with priors\
+\ls4\ilvl0\cf4 {\listtext	\'95	}\ul sigmoid.m\cf2 \ulnone  - calculate the sigmoid\
+	\
+\pard\pardeftab720\sl420\ql\qnatural
+\cf2 \
+\pard\pardeftab720\sl420\ql\qnatural
+
+\b\fs32 \cf5 weight functions\
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl420\ql\qnatural
+\ls5\ilvl0
+\b0\fs28 \cf4 {\listtext	\'95	}\ul checkWeight.m\cf2 \ulnone  - calculates the fit error and clustering robustness for each gene and saves it in a temporary file\
+\ls5\ilvl0\cf4 {\listtext	\'95	}\ul getWeightError.m\cf2 \ulnone  - collects the results from "weightA.sh" for all the genes and deletes the temporary files\
+\ls5\ilvl0\cf4 {\listtext	\'95	}\ul totalWeightErr.m\cf2 \ulnone  - collects results from "weightB.sh" for all values of k and weight. plots in graph\
+\pard\pardeftab720\sl420\ql\qnatural
+\cf2 \
+\pard\pardeftab720\sl420\sa480\ql\qnatural
+
+\f1\fs48 \cf3 shell scripts\
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl420\ql\qnatural
+\ls6\ilvl0
+\f0\fs28 \cf4 {\listtext	\'95	}\ul impulse.conf\cf2 \ulnone  - configuration file for "fit_and_cluster.sh"\
+\ls6\ilvl0\cf4 {\listtext	\'95	}\ul fit_and_cluster.sh\cf2 \ulnone  - main script. submits iterations of "fit_gene.sh" followed by "get_priors.sh" to the sun grid engine\
+\ls6\ilvl0\cf4 {\listtext	\'95	}\ul fit_gene.sh\cf2 \ulnone  - calls "fit_gene.m" concurrently on all genes in the gene list\
+\ls6\ilvl0\cf4 {\listtext	\'95	}\ul get_priors.sh\cf2 \ulnone  - calls "get_priors.m" on the results of "fit_gene.sh", once results are ready\
+\pard\pardeftab720\sl420\ql\qnatural
+\cf2 \
+\pard\pardeftab720\sl420\ql\qnatural
+
+\b\fs32 \cf5 weight scripts\
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl420\ql\qnatural
+\ls7\ilvl0
+\b0\fs28 \cf4 {\listtext	\'95	}\ul weight.conf\cf2 \ulnone  - configuration file for "weight.sh"\
+\ls7\ilvl0\cf4 {\listtext	\'95	}\ul weight.sh\cf2 \ulnone  - main weight script. submits "weightA.sh" followed by "weightB.sh" to the sun grid engine with different weights and k values\
+\ls7\ilvl0\cf4 {\listtext	\'95	}\ul weightA.sh\cf2 \ulnone  - calls "checkWeight.m" concurrently on all genes in the gene list, for all values of k and weight\
+\ls7\ilvl0\cf4 {\listtext	\'95	}\ul weightB.sh\cf2 \ulnone  - calls "getWeightErr.m" on the results of "weightA.sh", once results are ready\
+\pard\pardeftab720\sl420\ql\qnatural
+\cf2 \
+\pard\pardeftab720\sl420\sa480\ql\qnatural
+
+\f1\fs48 \cf3 analysis scripts\
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl420\ql\qnatural
+\ls8\ilvl0
+\f0\fs28 \cf4 {\listtext	\'95	}\ul analyseClusters.m\cf2 \ulnone  - draws all the pretty figures. you can use the cells (cmd+return) to draw only part of the figures.\
+\ls8\ilvl0\cf4 {\listtext	\'95	}\ul drawClusters.m\cf2 \ulnone  - draws the clusters and the profiles\
+\ls8\ilvl0\cf4 {\listtext	\'95	}\ul getColors.m\cf2 \ulnone  - sets the colormap for when there are more than 7 colors (which is matlab's defaults)\
+\ls8\ilvl0\cf4 {\listtext	\'95	}\ul plot_impluse.m\cf2 \ulnone  - draws the expression data and fit\
+\ls8\ilvl0\cf4 {\listtext	\'95	}\ul priors2profiles.m\cf2 \ulnone  - converts form impulse parameters to expression data at given time points}
